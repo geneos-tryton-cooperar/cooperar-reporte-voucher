@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tryton>
+    <data>
+        <record model="ir.action.report" id="report_voucher_new">
+          <field name="name">Imprimir Comprobante</field>
+          <field name="report_name">account.voucher</field>
+          <field name="model">account.voucher</field>
+          <field name="report">pepeito.prep</field>
+          <field name="template_extension">odt</field>
+          <field name="extension">pdf</field>
+        </record>
+        <record model="ir.action.keyword" id="print_keyword">
+            <field name="keyword">form_print</field>
+            <field name="model">account.voucher,-1</field>
+            <field name="action" ref="report_voucher_new"/>
+        </record> 
+    </data>
+</tryton>

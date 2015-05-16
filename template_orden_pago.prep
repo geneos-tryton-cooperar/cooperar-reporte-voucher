@@ -1,0 +1,174 @@
+{{def( header_orden, comprobante_orden, formas_de_pago_orden, totales_orden, conceptos_orden, footer_orden)}}
+<!DOCTYPE document SYSTEM "rml.dtd">
+<document>
+  <docinit>
+    <registerTTFont faceName="LiberationMono" fileName="LiberationMono-Regular.ttf"/>
+    <registerTTFont faceName="LiberationMono-Bold" fileName="LiberationMono-Bold.ttf"/>
+    <registerTTFont faceName="LiberationMono-BoldItalic" fileName="LiberationMono-BoldItalic.ttf"/>
+    <registerFontFamily name="LiberationMono" normal="LiberationMono" bold="LiberationMono-Bold" boldItalic="LiberationMono-Bold"/>
+  </docinit>
+
+    <template>
+        <pageTemplate id="main">
+            <!-- ++++++++++++++++++++++  GRAFICOS   ++++++++++++++++++++++ -->
+            <pageGraphics>
+                {{script}}
+                import os
+                fondo = os.path.join(os.path.dirname(os.path.realpath(__file__)), "orden_de_pago_cooperar_fondo.png")
+                {{endscript}}
+                <image file="{{fondo}}" x="0cm" y="0cm" width="21.0cm" height="29.69cm"/>
+            </pageGraphics>
+
+            <!-- ++++++++++++++++++++++  FRAMES   ++++++++++++++++++++++ -->
+            <!-- Generado por script -->
+            <frame id="fecha" x1="17.6821cm" y1="26.6779cm" width="2.4817cm" height="0.6376cm" />
+            <frame id="nro_orden_de_pago" x1="16.2818cm" y1="27.864cm" width="3.742cm" height="0.6376cm" />
+            <frame id="apellidoNombre" x1="2.9538cm" y1="24.1563cm" width="16.8521cm" height="0.673cm" />
+            <frame id="cuil" x1="4.1675cm" y1="23.2202cm" width="15.6603cm" height="0.6376cm" />
+
+            <frame id="tablaComprobante" x1="1.2014cm" y1="15.7002cm" width="10.1155cm" height="5.0017cm" />
+        
+            <frame id="pago_cheque" x1="11.2786cm" y1="19.7595cm" width="1.8881cm" height="0.613cm" />
+            <frame id="pago_banco" x1="13.9202cm" y1="19.7595cm" width="3.9085cm" height="0.613cm" />
+            <frame id="pago_importe" x1="18.3377cm" y1="19.7595cm" width="1.8881cm" height="0.613cm" />
+            <frame id="pago_cheque_9" x1="11.2786cm" y1="17.596cm" width="2.3135cm" height="0.613cm" />
+            <frame id="pago_banco_7" x1="13.971cm" y1="17.596cm" width="3.9085cm" height="0.613cm" />
+            <frame id="pago_importe_8" x1="18.332cm" y1="17.596cm" width="1.8881cm" height="0.613cm" />
+            <frame id="pago_entidad" x1="11.2786cm" y1="15.6003cm" width="5.2103cm" height="0.6376cm" />
+            
+            <frame id="comp_subtotal" x1="5.6781cm" y1="14.4813cm" width="4.9102cm" height="0.492cm" />
+            <frame id="comp_ret_imp" x1="5.6781cm" y1="13.9049cm" width="4.9102cm" height="0.492cm" />
+            <frame id="comp_total" x1="5.6781cm" y1="12.7709cm" width="4.9102cm" height="0.492cm" />
+            <frame id="comp_total_6" x1="15.9373cm" y1="12.8049cm" width="4.9102cm" height="0.492cm" />
+
+            <frame id="tablaConceptos" x1="0.1616cm" y1="4.3377cm" width="20.7215cm" height="7.1875cm" />
+            
+            <frame id="total_abonar" x1="17.0363cm" y1="3.4886cm" width="3.8469cm" height="0.492cm" />
+
+            <frame id="control" x1="6.1682cm" y1="1.6592cm" width="5.7254cm" height="0.6424cm" />
+            <frame id="autorizacion" x1="12.4755cm" y1="1.6275cm" width="5.2103cm" height="0.6376cm" />
+            <frame id="confeccion" x1="0.3521cm" y1="1.6706cm" width="4.9102cm" height="0.6424cm" />
+
+            <!-- /Generado por script -->
+        </pageTemplate>
+    </template>
+
+
+    <!-- ++++++++++++++++++++++  STYLESHEETS   ++++++++++++++++++++++ -->
+    <stylesheet>    
+        <paraStyle name="txtTitulo" fontName="LiberationMono" fontSize="8" leading="2" spaceBefore="0" spaceAfter="6" />
+        <paraStyle name="txtHeader" fontName="LiberationMono" fontSize="8" leading="2" spaceBefore="0" spaceAfter="6" alignment="center"/>
+        <paraStyle name="txtHeaderChico" fontName="LiberationMono" fontSize="6" leading="2" spaceBefore="0" spaceAfter="6" alignment="center"/>
+        <paraStyle name="txtTablaIzquierda" fontName="LiberationMono" fontSize="8" leading="2" spaceBefore="0" spaceAfter="6" alignment="left"/>
+        <paraStyle name="txtTituloDerecha" fontName="LiberationMono" fontSize="8" leading="2" spaceBefore="0" spaceAfter="6" alignment="right"/>
+        <paraStyle name="txtNegrita" fontName="LiberationMono-Bold" fontSize="8" leading="2" spaceBefore="0" spaceAfter="6"/>
+        <paraStyle name="txtNegritaDerecha" fontName="LiberationMono-Bold" fontSize="8" leading="2" spaceBefore="0" spaceAfter="6" alignment="right"/>
+        <paraStyle name="txtVacio" fontName="LiberationMono-Bold" fontSize="8" leading="1" spaceBefore="0" spaceAfter="6"/>
+        <paraStyle name="txtLeyenda" fontName="LiberationMono" fontSize="8" leading="8" spaceBefore="3" spaceAfter="3" alignment="justify" />
+        <paraStyle name="txtVencimientos" fontName="LiberationMono" fontSize="12" leading="3" spaceBefore="0" spaceAfter="6" alignment="center" />
+        <paraStyle name="txtRegular" fontName="LiberationMono" fontSize="9" leading="0.35cm" spaceBefore="0" spaceAfter="0"/>
+        <paraStyle name="paraTabla" fontName="LiberationMono" fontSize="7" leading="0.35cm" spaceBefore="0" spaceAfter="0"/>
+        <paraStyle name="centrado" fontName="LiberationMono" fontSize="8" leading="0.35cm" spaceBefore="0" spaceAfter="0" alignment="center"/>
+
+        <blockTableStyle id="tabla-conceptos-facturados">
+            <blockFont name="LiberationMono" size="6"/>
+            <!--<blockSpan start="0,0" stop="1,0"/>-->
+        </blockTableStyle>
+
+    </stylesheet>
+
+    <!-- ++++++++++++++++++++++      STORY      ++++++++++++++++++++++ -->
+    <story>
+         <!-- +++++++++++++++++++++ Header +++++++++++++++++++++ -->
+        <setNextFrame name="fecha"/>
+        <nextFrame/>
+        <para style="txtTitulo">{{header_orden["fecha"]}}</para>
+
+        <setNextFrame name="nro_orden_de_pago"/>
+        <nextFrame/>
+        <para style="txtTitulo">{{header_orden["nro_orden_de_pago"]}}</para>
+
+        <setNextFrame name="apellidoNombre"/>
+        <nextFrame/>
+        <para style="txtTitulo">{{header_orden["apellidoNombre"]}}</para>
+
+        <setNextFrame name="cuil"/>
+        <nextFrame/>
+        <para style="txtTitulo">{{header_orden["cuil"]}}</para>
+
+        <!-- +++++++++++++++++++++ Comprobante +++++++++++++++++++++ -->
+
+         <setNextFrame name="tablaComprobante"/>
+         <nextFrame/>
+         <blockTable colWidths="3cm,2cm,3cm,3cm" repeatRows="1" style="tabla-conceptos-facturados">
+             {{for (linea) in comprobante_orden["tablaComprobante"]}}
+             <tr><td>{{linea[0]}}</td><td>{{linea[1]}}</td><td>{{linea[2]}}</td><td>{{linea[3]}}</td></tr>
+             {{endfor}}
+
+         </blockTable>
+
+        <!-- +++++++++++++++++++++ Formas de Pago +++++++++++++++++++++ -->
+
+        <setNextFrame name="pago_cheque"/>
+        <nextFrame/>
+        <para style="txtTitulo">{{formas_de_pago_orden["pago_cheque"]}}</para>
+
+        <setNextFrame name="pago_banco"/>
+        <nextFrame/>
+        <para style="txtTitulo">{{formas_de_pago_orden["pago_banco"]}}</para>
+
+        <setNextFrame name="pago_importe"/>
+        <nextFrame/>
+        <para style="txtTitulo">{{formas_de_pago_orden["pago_importe"]}}</para>
+
+        <setNextFrame name="pago_cheque_9"/>
+        <nextFrame/>
+        <para style="txtTitulo">{{formas_de_pago_orden["pago_cheque_9"]}}</para>
+
+        <setNextFrame name="pago_banco_7"/>
+        <nextFrame/>
+        <para style="txtTitulo">{{formas_de_pago_orden["pago_banco_7"]}}</para>
+
+        <setNextFrame name="pago_importe_8"/>
+        <nextFrame/>
+        <para style="txtTitulo">{{formas_de_pago_orden["pago_importe_8"]}}</para>
+
+        <setNextFrame name="pago_entidad"/>
+        <nextFrame/>
+        <para style="txtTitulo">{{formas_de_pago_orden["pago_entidad"]}}</para>
+         
+
+         <!-- +++++++++++++++++++++ Totales +++++++++++++++++++++ -->
+
+        <setNextFrame name="comp_subtotal"/>
+        <nextFrame/>
+        <para style="txtTitulo">{{totales_orden["comp_subtotal"]}}</para>
+
+        <setNextFrame name="comp_ret_imp"/>
+        <nextFrame/>
+        <para style="txtTitulo">{{totales_orden["comp_ret_imp"]}}</para>
+
+        <setNextFrame name="comp_total"/>
+        <nextFrame/>
+        <para style="txtTitulo">{{totales_orden["comp_total"]}}</para>
+
+        <setNextFrame name="comp_total_6"/>
+        <nextFrame/>
+        <para style="txtTitulo">{{totales_orden["comp_total_6"]}}</para>
+
+
+         <!-- +++++++++++++++++++++ Conceptos +++++++++++++++++++++ -->
+
+         <setNextFrame name="tablaConceptos"/>
+         <nextFrame/>
+         <para style="txtTitulo">{{conceptos_orden["tablaConceptos"]}}</para>
+         
+
+        <!-- +++++++++++++++++++++ Footer +++++++++++++++++++++ -->  
+
+         <setNextFrame name="total_abonar"/>
+         <nextFrame/>
+         <para style="txtHeader">{{footer_orden["total_abonar"]}}</para>
+
+    </story>
+</document>

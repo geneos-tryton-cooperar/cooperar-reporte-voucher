@@ -1,0 +1,120 @@
+{{def(header_recibo, formas_de_pago_recibo, conceptos_recibo, totales_recibo, imputacion_recibo)}}
+<!DOCTYPE document SYSTEM "rml.dtd">
+<document>
+  <docinit>
+    <registerTTFont faceName="LiberationMono" fileName="LiberationMono-Regular.ttf"/>
+    <registerTTFont faceName="LiberationMono-Bold" fileName="LiberationMono-Bold.ttf"/>
+    <registerTTFont faceName="LiberationMono-BoldItalic" fileName="LiberationMono-BoldItalic.ttf"/>
+    <registerFontFamily name="LiberationMono" normal="LiberationMono" bold="LiberationMono-Bold" boldItalic="LiberationMono-Bold"/>
+  </docinit>
+
+    <template>
+        <pageTemplate id="main">
+            <!-- ++++++++++++++++++++++  GRAFICOS   ++++++++++++++++++++++ -->
+            <pageGraphics>
+                {{script}}
+                import os
+                fondo = os.path.join(os.path.dirname(os.path.realpath(__file__)), "recibo_cooperar_fondo.png")
+                {{endscript}}
+                <image file="{{fondo}}" x="0cm" y="0cm" width="21.0cm" height="29.69cm"/>
+            </pageGraphics>
+
+            <!-- ++++++++++++++++++++++  FRAMES   ++++++++++++++++++++++ -->
+            <!-- Generado por script -->
+            <frame id="nrofactura" x1="15.8152cm" y1="28.1292cm" width="3.8989cm" height="0.6376cm" />
+            <frame id="fecha" x1="16.188cm" y1="26.2925cm" width="2.4817cm" height="0.6376cm" />
+            <frame id="apellidoynombre" x1="4.5291cm" y1="23.1154cm" width="14.2168cm" height="0.6376cm" />
+            <frame id="legajo7" x1="5.34cm" y1="22.0036cm" width="13.4182cm" height="0.6376cm" />
+            
+            <frame id="formas_de_pago" x1="0.2027cm" y1="16.4105cm" width="20.7449cm" height="4.2346cm" />
+
+            <frame id="conceptos" x1="0.2024cm" y1="4.8259cm" width="20.7449cm" height="10.1806cm" />
+            
+            <frame id="total" x1="17.9695cm" y1="3.8672cm" width="2.8445cm" height="0.6376cm" />
+
+            <frame id="total3" x1="0.7788cm" y1="0.3912cm" width="6.7385cm" height="2.0202cm" />
+
+            <!-- /Generado por script -->
+        </pageTemplate>
+    </template>
+
+
+    <!-- ++++++++++++++++++++++  STYLESHEETS   ++++++++++++++++++++++ -->
+    <stylesheet>    
+        <paraStyle name="txtTitulo" fontName="LiberationMono" fontSize="8" leading="2" spaceBefore="0" spaceAfter="6" />
+        <paraStyle name="txtHeader" fontName="LiberationMono" fontSize="8" leading="2" spaceBefore="0" spaceAfter="6" alignment="center"/>
+        <paraStyle name="txtHeaderChico" fontName="LiberationMono" fontSize="6" leading="2" spaceBefore="0" spaceAfter="6" alignment="center"/>
+        <paraStyle name="txtTablaIzquierda" fontName="LiberationMono" fontSize="8" leading="2" spaceBefore="0" spaceAfter="6" alignment="left"/>
+        <paraStyle name="txtTituloDerecha" fontName="LiberationMono" fontSize="8" leading="2" spaceBefore="0" spaceAfter="6" alignment="right"/>
+        <paraStyle name="txtNegrita" fontName="LiberationMono-Bold" fontSize="8" leading="2" spaceBefore="0" spaceAfter="6"/>
+        <paraStyle name="txtNegritaDerecha" fontName="LiberationMono-Bold" fontSize="8" leading="2" spaceBefore="0" spaceAfter="6" alignment="right"/>
+        <paraStyle name="txtVacio" fontName="LiberationMono-Bold" fontSize="8" leading="1" spaceBefore="0" spaceAfter="6"/>
+        <paraStyle name="txtLeyenda" fontName="LiberationMono" fontSize="8" leading="8" spaceBefore="3" spaceAfter="3" alignment="justify" />
+        <paraStyle name="txtVencimientos" fontName="LiberationMono" fontSize="12" leading="3" spaceBefore="0" spaceAfter="6" alignment="center" />
+        <paraStyle name="txtRegular" fontName="LiberationMono" fontSize="9" leading="0.35cm" spaceBefore="0" spaceAfter="0"/>
+        <paraStyle name="paraTabla" fontName="LiberationMono" fontSize="7" leading="0.35cm" spaceBefore="0" spaceAfter="0"/>
+        <paraStyle name="centrado" fontName="LiberationMono" fontSize="8" leading="0.35cm" spaceBefore="0" spaceAfter="0" alignment="center"/>
+
+        <blockTableStyle id="tabla-conceptos-facturados">
+            <blockFont name="LiberationMono" size="6"/>
+            <!--<blockSpan start="0,0" stop="1,0"/>-->
+        </blockTableStyle>
+
+    </stylesheet>
+
+    <!-- ++++++++++++++++++++++      STORY      ++++++++++++++++++++++ -->
+    <story>
+         <!-- +++++++++++++++++++++ Header +++++++++++++++++++++ -->
+        <setNextFrame name="nrofactura"/>
+        <nextFrame/>
+        <para style="txtTitulo">{{header_recibo["nrofactura"]}}</para>
+
+        <setNextFrame name="fecha"/>
+        <nextFrame/>
+        <para style="txtTitulo">{{header_recibo["fecha"]}}</para>
+
+        <setNextFrame name="apellidoynombre"/>
+        <nextFrame/>
+        <para style="txtTitulo">{{header_recibo["apellidoynombre"]}}</para>
+
+        <setNextFrame name="legajo7"/>
+        <nextFrame/>
+        <para style="txtTitulo">{{header_recibo["legajo7"]}}</para>
+
+        <!-- +++++++++++++++++++++ Formas de Pago +++++++++++++++++++++ -->
+
+         <setNextFrame name="formas_de_pago"/>
+         <nextFrame/>
+         <blockTable colWidths="9cm,9cm" repeatRows="1" style="tabla-conceptos-facturados">
+             {{for (linea) in formas_de_pago_recibo["formas_de_pago"]}}
+             <tr><td>{{linea[0]}}</td><td>{{linea[1]}}</td></tr>
+             {{endfor}}
+
+         </blockTable>
+
+        <!-- +++++++++++++++++++++ Conceptos +++++++++++++++++++++ -->
+
+         <setNextFrame name="conceptos"/>
+         <nextFrame/>
+         <blockTable colWidths="9cm" repeatRows="1" style="tabla-conceptos-facturados">
+             {{for (linea) in conceptos_recibo["conceptos"]}}
+             <tr><td>{{linea}}</td></tr>
+             {{endfor}}
+
+         </blockTable>
+
+         <!-- +++++++++++++++++++++ Totales +++++++++++++++++++++ -->
+
+        <setNextFrame name="total"/>
+        <nextFrame/>
+        <para style="txtTitulo">{{totales_recibo["total"]}}</para>
+         
+
+        <!-- +++++++++++++++++++++ Imputacion +++++++++++++++++++++ -->  
+
+         <setNextFrame name="total3"/>
+         <nextFrame/>
+         <para style="txtHeader">{{imputacion_recibo["total3"]}}</para>
+
+    </story>
+</document>

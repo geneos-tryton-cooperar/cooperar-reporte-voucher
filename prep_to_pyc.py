@@ -2,6 +2,7 @@ from z3c.rml import rml2pdf
 import preppy
 
 template_recibo = preppy.getModule('template_recibo.prep')
+template_orden_pago = preppy.getModule('template_orden_pago.prep')
 
 
 #Traer cada modulo de datos

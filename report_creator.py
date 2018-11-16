@@ -199,6 +199,9 @@ def conceptos_recibo(voucher):
         return ret
  
     conceptos = get_conceptos(voucher)
+
+    if len(conceptos)==0:
+        conceptos = [' ']
     
     return {
         "conceptos": conceptos,

@@ -175,8 +175,8 @@ def conceptos_recibo(voucher):
         nombre_comprobante = ''
         for line in voucher.lines:  
         
-
-            if line.move_line.move:
+            
+            if line.move_line:
                 invoices = Invoice.search(
                 [('move', '=', line.move_line.move.id)])
             if invoices:

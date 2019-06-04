@@ -180,19 +180,14 @@ def conceptos_recibo(voucher):
                     invoices = Invoice.search(
                         [('move', '=', line.move_line.move.id)])
                     if invoices:
-                        if str(invoices[0].invoice_type.id) == '6':
+                        if str(invoices[0].invoice_type.id) == '12':
                             nombre_comprobante = 'Nota de Debito B'
-                        elif str(invoices[0].invoice_type.id) == '2':
+                        elif str(invoices[0].invoice_type.id) == '11':
                             nombre_comprobante = 'Nota de Debito A'
-                        elif str(invoices[0].invoice_type.id) == '17':
+                        elif str(invoices[0].invoice_type.id) == '7':
                             nombre_comprobante = 'Factura A'
-                        elif str(invoices[0].invoice_type.id) == '18':
-                            nombre_comprobante = 'Factura B'
-                        elif str(invoices[0].invoice_type.id) == '3':
-                            nombre_comprobante = 'Nota de Credito A'
                         elif str(invoices[0].invoice_type.id) == '8':
-                            nombre_comprobante = 'Nota de Credito B'
-
+                            nombre_comprobante = 'Factura B'                        
                     
                     if int(line.amount) > 0:   
                         ret.append((nombre_comprobante + ' : ' + line.name))

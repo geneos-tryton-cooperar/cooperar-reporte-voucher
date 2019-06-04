@@ -170,7 +170,7 @@ def conceptos_recibo(voucher):
 
     def get_conceptos(voucher):
         
-        import pudb;pu.db
+       
         ret = []
         Invoice = Pool().get('account.invoice')
         nombre_comprobante = ''
